@@ -17,5 +17,7 @@ export default async function DemoPage({ searchParams }: DemoPageProps) {
   const langResult = langSchema.safeParse(params.lang);
   const lang = langResult.success ? langResult.data : content.defaultLanguage;
 
-  return <Invitation content={content} lang={lang} />;
+  const guestLine = params.to?.trim().slice(0, 80) || undefined;
+
+  return <Invitation content={content} lang={lang} guestLine={guestLine} />;
 }

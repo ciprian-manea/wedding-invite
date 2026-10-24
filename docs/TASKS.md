@@ -16,12 +16,12 @@ typecheck + lint + build passing, a mobile-qa run, and a commit.
 
 ## M1 · Opening sequence
 
-- [ ] `Invitation` state machine (idle → opening → revealed) exactly as in docs/OPENING_SEQUENCE.md
-- [ ] `Envelope`: poster, guest line from `?to=`, invited line, pulsing tap hint, language switch
-- [ ] `OpeningVideo`: source by screen size, first-frame handoff, ended/timeout/error handling, Skip button
-- [ ] `MusicController`: Web Audio gain fade, audioSession playback, mute button, visibility pause
-- [ ] Reduced motion path, slow-network loader, scroll lock
-- [ ] `tests/opening.spec.ts`
+- [x] `Invitation` state machine (idle → opening → revealed) exactly as in docs/OPENING_SEQUENCE.md
+- [x] `Envelope`: poster, guest line from `?to=`, invited line, pulsing tap hint, language switch
+- [x] `OpeningVideo`: source by screen size, first-frame handoff, ended/timeout/error handling, Skip button
+- [x] `MusicController`: Web Audio gain fade, audioSession playback, mute button, visibility pause
+- [x] Reduced motion path, slow-network loader, scroll lock
+- [x] `tests/opening.spec.ts`
 - **Accept:** mobile-qa steps 1–3, 6, 7 pass; owner confirms on a real iPhone and Android.
 
 ## M2 · Content sections
