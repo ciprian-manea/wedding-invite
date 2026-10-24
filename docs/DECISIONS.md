@@ -8,3 +8,4 @@ Append new decisions at the bottom: date, decision, why. Never rewrite old entri
 - 2026-10-18 · H.264 MP4 in two sizes, no HEVC-only. Why: HEVC fails on many Android/Chrome devices.
 - 2026-10-18 · Content in JSON files validated by Zod, no database in v1. Why: fastest path; the loader is the only thing to swap later.
 - 2026-10-18 · Only `motion` for animation. Why: one library, React-friendly, enough for reveals and scroll effects.
+- 2026-10-24 · `loadContent()` is marked `"use cache"`; `/demo` is marked `export const instant = false`. Why: this Next.js version (16, Cache Components on by default) errors at build/dev time on uncached file reads and on reading `searchParams` outside `<Suspense>` during prerendering. The content JSON read is static and cacheable; the page itself is genuinely per-request (guest line and language come from the URL), so it's marked as an allowed blocking route rather than forced into a Suspense shell for a single-route draft.

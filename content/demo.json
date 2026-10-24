@@ -1,0 +1,206 @@
+{
+  "slug": "demo",
+  "design": "jardin-blanc",
+  "languages": ["ro", "ru", "en"],
+  "defaultLanguage": "ro",
+  "couple": { "partner1": "Ana", "partner2": "Ion", "monogram": "A&I" },
+  "greeting": {
+    "generic": {
+      "ro": "Dragi invitați",
+      "ru": "Дорогие гости",
+      "en": "Dear guests"
+    },
+    "invitedLine": {
+      "ro": "sunteți invitați la nunta noastră",
+      "ru": "приглашаем вас на нашу свадьбу",
+      "en": "you are invited to our wedding"
+    },
+    "tapToOpen": {
+      "ro": "Atinge pentru a deschide",
+      "ru": "Нажмите, чтобы открыть",
+      "en": "Tap to open"
+    }
+  },
+  "event": {
+    "dateTime": "2027-06-12T15:00:00+03:00",
+    "timezone": "Europe/Chisinau",
+    "rsvpDeadline": "2027-05-20"
+  },
+  "music": {
+    "src": "/media/jardin-blanc/music.m4a",
+    "credit": "Placeholder tone"
+  },
+  "sections": [
+    {
+      "type": "cover",
+      "subtitle": {
+        "ro": "Ne căsătorim",
+        "ru": "Мы женимся",
+        "en": "We're getting married"
+      },
+      "quote": {
+        "ro": "Doi oameni, o poveste",
+        "ru": "Два человека, одна история",
+        "en": "Two people, one story"
+      }
+    },
+    {
+      "type": "countdown",
+      "title": {
+        "ro": "Până la marea zi",
+        "ru": "До большого дня",
+        "en": "Until the big day"
+      }
+    },
+    {
+      "type": "story",
+      "title": {
+        "ro": "Povestea noastră",
+        "ru": "Наша история",
+        "en": "Our story"
+      },
+      "text": {
+        "ro": "Ne-am cunoscut într-o seară de vară și de atunci nu ne-am mai despărțit.",
+        "ru": "Мы встретились одним летним вечером и с тех пор не расставались.",
+        "en": "We met one summer evening and have been together ever since."
+      },
+      "photos": [
+        {
+          "src": "/media/jardin-blanc/illustrations/story-1.webp",
+          "alt": {
+            "ro": "Prima întâlnire",
+            "ru": "Первая встреча",
+            "en": "Our first meeting"
+          }
+        },
+        {
+          "src": "/media/jardin-blanc/illustrations/story-2.webp",
+          "alt": { "ro": "Logodna", "ru": "Помолвка", "en": "The proposal" }
+        }
+      ]
+    },
+    {
+      "type": "schedule",
+      "title": {
+        "ro": "Programul zilei",
+        "ru": "Программа дня",
+        "en": "The schedule"
+      },
+      "items": [
+        {
+          "time": "15:00",
+          "title": {
+            "ro": "Cununia religioasă",
+            "ru": "Венчание",
+            "en": "Church ceremony"
+          },
+          "place": {
+            "ro": "Biserica Sfânta Treime",
+            "ru": "Церковь Святой Троицы",
+            "en": "Holy Trinity Church"
+          },
+          "icon": "church"
+        },
+        {
+          "time": "17:00",
+          "title": {
+            "ro": "Cocktail de bun venit",
+            "ru": "Welcome-коктейль",
+            "en": "Welcome cocktail"
+          },
+          "icon": "glass"
+        },
+        {
+          "time": "18:30",
+          "title": {
+            "ro": "Cina festivă",
+            "ru": "Праздничный ужин",
+            "en": "Festive dinner"
+          },
+          "icon": "dinner"
+        },
+        {
+          "time": "21:00",
+          "title": {
+            "ro": "Petrecere și muzică",
+            "ru": "Вечеринка и музыка",
+            "en": "Party and music"
+          },
+          "icon": "music"
+        },
+        {
+          "time": "23:00",
+          "title": {
+            "ro": "Tortul miresei",
+            "ru": "Свадебный торт",
+            "en": "Wedding cake"
+          },
+          "icon": "cake"
+        }
+      ]
+    },
+    {
+      "type": "venue",
+      "title": { "ro": "Locația", "ru": "Место проведения", "en": "The venue" },
+      "places": [
+        {
+          "name": "Orangeria Jardin Blanc",
+          "address": "Str. Florilor 12, Chișinău",
+          "mapsUrl": "https://maps.google.com/?q=Orangeria+Jardin+Blanc",
+          "image": "/media/jardin-blanc/illustrations/venue.webp",
+          "addToCalendar": true
+        }
+      ]
+    },
+    {
+      "type": "dressCode",
+      "title": {
+        "ro": "Codul vestimentar",
+        "ru": "Дресс-код",
+        "en": "Dress code"
+      },
+      "text": {
+        "ro": "Eleganță de grădină, în tonuri calde de ivoriu și salvie.",
+        "ru": "Элегантность в саду, в тёплых тонах слоновой кости и шалфея.",
+        "en": "Garden elegance, in warm ivory and sage tones."
+      },
+      "palette": ["#F7F2E8", "#C9D1BC", "#7E8F6E", "#B89B6A"]
+    },
+    {
+      "type": "gifts",
+      "title": { "ro": "Cadouri", "ru": "Подарки", "en": "Gifts" },
+      "text": {
+        "ro": "Prezența voastră este cel mai de preț cadou. Dacă doriți totuși să ne susțineți:",
+        "ru": "Ваше присутствие — самый ценный подарок. Но если хотите поддержать нас:",
+        "en": "Your presence is the greatest gift. If you'd still like to contribute:"
+      },
+      "iban": "MD24AG000000002230999RO",
+      "holder": "Ana & Ion"
+    },
+    {
+      "type": "scratchReveal",
+      "title": { "ro": "Data", "ru": "Дата", "en": "The date" },
+      "hint": { "ro": "Răzuiește", "ru": "Сотрите", "en": "Scratch" }
+    },
+    {
+      "type": "rsvp",
+      "title": { "ro": "Confirmare", "ru": "Подтверждение", "en": "RSVP" },
+      "text": {
+        "ro": "Vă rugăm să confirmați până la 20 mai",
+        "ru": "Пожалуйста, подтвердите до 20 мая",
+        "en": "Please reply by 20 May"
+      },
+      "askAllergies": true,
+      "askSong": true,
+      "maxSeats": 4
+    },
+    {
+      "type": "footer",
+      "text": {
+        "ro": "Cu drag, Ana și Ion",
+        "ru": "С любовью, Анна и Ион",
+        "en": "With love, Ana & Ion"
+      }
+    }
+  ]
+}
