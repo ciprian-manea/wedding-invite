@@ -168,7 +168,9 @@ export function ScratchReveal({
         className="relative mx-auto h-48 w-full max-w-xs overflow-hidden rounded-[var(--radius-card)] shadow-md"
       >
         <div className="absolute inset-0 flex items-center justify-center bg-[var(--color-paper)]">
-          <p className="font-[family-name:var(--font-script)] text-4xl text-[var(--color-accent)]">
+          {/* See SectionTitle.tsx: Pinyon Script has no Cyrillic glyphs, and
+              dateLabel can be Cyrillic (lib/date.ts formats it per lang). */}
+          <p className="font-[family-name:var(--font-script),var(--font-serif)] text-4xl text-[var(--color-accent)]">
             {dateLabel}
           </p>
         </div>

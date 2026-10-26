@@ -8,7 +8,7 @@ import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
 // the tap. Regular manual scrolling can still pass a button through that
 // band momentarily, but it won't come to rest there.
 const buttonClassName =
-  "inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border border-[var(--color-accent)] px-6 font-[family-name:var(--font-sans)] text-[13px] uppercase tracking-[0.15em] text-[var(--color-accent)] transition-colors active:bg-[var(--color-accent)]/10 scroll-mb-[calc(env(safe-area-inset-bottom)+76px)]";
+  "inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border border-[var(--color-accent)] px-6 font-[family-name:var(--font-sans)] text-[13px] uppercase tracking-[0.15em] text-[var(--color-accent)] transition-colors active:bg-[var(--color-accent)]/10 scroll-mb-[calc(env(safe-area-inset-bottom)+76px)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2";
 
 function joinClassNames(...values: Array<string | undefined>): string {
   return values.filter(Boolean).join(" ");

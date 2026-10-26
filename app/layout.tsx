@@ -20,9 +20,17 @@ const fontSans = Jost({
   weight: ["400", "500"],
 });
 
+const siteUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : "http://localhost:3000";
+
+// A generic fallback only: the real, per-wedding title/description/OG image
+// come from content/*.json via app/demo/page.tsx's generateMetadata, which
+// overrides every field here for that route.
 export const metadata: Metadata = {
-  title: "Ana & Ion",
-  description: "You're invited to our wedding.",
+  metadataBase: new URL(siteUrl),
+  title: "Wedding Invitation",
+  description: "A digital wedding invitation.",
   robots: { index: false, follow: false },
 };
 

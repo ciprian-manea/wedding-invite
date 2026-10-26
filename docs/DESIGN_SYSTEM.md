@@ -10,8 +10,8 @@ white roses and soft greenery, light and airy, romantic and calm. Our own artwor
 | `--color-paper`       | `#F7F2E8`                      | page background               |
 | `--color-paper-deep`  | `#EDE4D3`                      | cards, scratch cover          |
 | `--color-ink`         | `#3E3A33`                      | body text                     |
-| `--color-ink-soft`    | `#7A7266`                      | secondary text                |
-| `--color-accent`      | `#7E8F6E`                      | sage: titles, buttons, seal   |
+| `--color-ink-soft`    | `#766E63`                      | secondary text                |
+| `--color-accent`      | `#667359`                      | sage: titles, buttons, seal   |
 | `--color-accent-soft` | `#C9D1BC`                      | dividers, outlines            |
 | `--color-gold`        | `#B89B6A`                      | fine lines and ornaments only |
 | `--color-error`       | `#B3443A`                      | form validation messages only |

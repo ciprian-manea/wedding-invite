@@ -41,10 +41,10 @@ typecheck + lint + build passing, a mobile-qa run, and a commit.
 
 ## M4 · Polish, performance, preview deploy
 
-- [ ] Motion pass: timings and easing per docs/DESIGN_SYSTEM.md
-- [ ] Images AVIF/WebP with sizes, fonts subset, video preload strategy checked
-- [ ] Accessibility: contrast, focus states, alt texts, button labels
-- [ ] `noindex` metadata; Open Graph title/image for the demo
+- [x] Motion pass: timings and easing per docs/DESIGN_SYSTEM.md
+- [x] Images AVIF/WebP with sizes, fonts subset, video preload strategy checked
+- [x] Accessibility: contrast, focus states, alt texts, button labels
+- [x] `noindex` metadata; Open Graph title/image for the demo
 - [ ] Deploy to Vercel preview
 - **Accept:** Lighthouse mobile ≥ 90 on the preview; owner tests from WhatsApp on both phones.
 

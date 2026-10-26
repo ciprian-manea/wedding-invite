@@ -22,7 +22,8 @@ export function Footer({
       rise={false}
       className="flex flex-col items-center gap-3 pb-16 text-center"
     >
-      <span className="font-[family-name:var(--font-script)] text-4xl text-[var(--color-accent)]">
+      {/* See SectionTitle.tsx: Pinyon Script has no Cyrillic glyphs. */}
+      <span className="font-[family-name:var(--font-script),var(--font-serif)] text-4xl text-[var(--color-accent)]">
         {monogram}
       </span>
       <p className="font-serif text-base text-[var(--color-ink-soft)]">

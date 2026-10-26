@@ -33,12 +33,12 @@ export function LanguageSwitch({
             aria-pressed={active}
             className={
               variant === "pill"
-                ? `flex min-h-11 min-w-11 items-center justify-center rounded-full font-sans text-xs tracking-[0.1em] uppercase transition-colors ${
+                ? `flex min-h-11 min-w-11 items-center justify-center rounded-full font-sans text-xs tracking-[0.1em] uppercase outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 ${
                     active
                       ? "bg-[var(--color-accent)] text-[var(--color-paper)]"
                       : "bg-[var(--color-paper)]/90 text-[var(--color-ink-soft)] shadow-md backdrop-blur"
                   }`
-                : `flex min-h-11 min-w-11 items-center justify-center px-2 font-sans text-xs tracking-[0.1em] uppercase ${
+                : `flex min-h-11 min-w-11 items-center justify-center px-2 font-sans text-xs tracking-[0.1em] uppercase outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 ${
                     active
                       ? "text-[var(--color-accent)]"
                       : "text-[var(--color-ink-soft)]"

@@ -27,7 +27,7 @@ const fieldLabelClassName =
 // auto-scroll brings it into view, where the fixed mute/language chrome
 // (see Invitation.tsx) would otherwise sit on top of it.
 const fieldInputClassName =
-  "min-h-12 w-full rounded-[var(--radius-card)] border border-[var(--color-accent-soft)] bg-[var(--color-paper)] px-4 font-serif text-lg text-[var(--color-ink)] focus:border-[var(--color-accent)] focus:outline-none scroll-mb-[calc(env(safe-area-inset-bottom)+76px)]";
+  "min-h-12 w-full rounded-[var(--radius-card)] border border-[var(--color-accent-soft)] bg-[var(--color-paper)] px-4 font-serif text-lg text-[var(--color-ink)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 scroll-mb-[calc(env(safe-area-inset-bottom)+76px)]";
 
 export function Rsvp({ section, guestLine, lang, defaultLanguage }: RsvpProps) {
   const strings = uiStrings[lang];
@@ -135,7 +135,7 @@ export function Rsvp({ section, guestLine, lang, defaultLanguage }: RsvpProps) {
                     type="button"
                     onClick={() => setAttending(option)}
                     aria-pressed={active}
-                    className={`min-h-12 min-w-24 scroll-mb-[calc(env(safe-area-inset-bottom)+76px)] rounded-full border font-sans text-sm tracking-[0.1em] uppercase transition-colors ${
+                    className={`min-h-12 min-w-24 scroll-mb-[calc(env(safe-area-inset-bottom)+76px)] rounded-full border font-sans text-sm tracking-[0.1em] uppercase outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 ${
                       active
                         ? "border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-paper)]"
                         : "border-[var(--color-accent-soft)] text-[var(--color-ink-soft)]"
