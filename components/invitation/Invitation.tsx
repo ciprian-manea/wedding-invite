@@ -8,6 +8,7 @@ import { formatEventDate } from "@/lib/date";
 import type { Content, Lang, Section } from "@/lib/content/schema";
 import { Cover } from "@/components/sections/Cover";
 import { Sections } from "@/components/sections/Sections";
+import { LanguageSwitch } from "@/components/ui/LanguageSwitch";
 import { Envelope } from "./Envelope";
 import { OpeningVideo } from "./OpeningVideo";
 import { MusicController, type MusicControllerHandle } from "./MusicController";
@@ -141,6 +142,22 @@ export function Invitation({ content, lang, guestLine }: InvitationProps) {
     }
   }, [machinePhase]);
 
+  // `<html lang>` and the URL's `?lang=` both need to track the guest's
+  // choice, not just the value read from the URL on first load. Plain
+  // history.replaceState (rather than next/navigation's useSearchParams)
+  // sidesteps that hook's Suspense-boundary requirement for static
+  // generation; see docs/DECISIONS.md.
+  useEffect(() => {
+    document.documentElement.lang = currentLang;
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set("lang", currentLang);
+      window.history.replaceState(null, "", url.toString());
+    } catch {
+      // ignore
+    }
+  }, [currentLang]);
+
   useEffect(() => {
     document.body.style.overflow = phase === "revealed" ? "" : "hidden";
     return () => {
@@ -236,7 +253,7 @@ export function Invitation({ content, lang, guestLine }: InvitationProps) {
             revealed={phase === "revealed"}
           />
         )}
-        <Sections content={content} lang={currentLang} />
+        <Sections content={content} lang={currentLang} guestLine={guestLine} />
       </main>
 
       <AnimatePresence>
@@ -315,6 +332,22 @@ export function Invitation({ content, lang, guestLine }: InvitationProps) {
           muteLabel={strings.mute}
           unmuteLabel={strings.unmute}
         />
+        {phase === "revealed" && (
+          <div
+            className="pointer-events-auto absolute"
+            style={{
+              bottom: "max(env(safe-area-inset-bottom), 16px)",
+              left: "max(env(safe-area-inset-left), 16px)",
+            }}
+          >
+            <LanguageSwitch
+              languages={languages}
+              lang={currentLang}
+              onChange={setCurrentLang}
+              variant="pill"
+            />
+          </div>
+        )}
       </div>
     </div>
   );

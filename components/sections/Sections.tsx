@@ -5,14 +5,17 @@ import { Schedule } from "./Schedule";
 import { Venue } from "./Venue";
 import { DressCode } from "./DressCode";
 import { Gifts } from "./Gifts";
+import { ScratchReveal } from "./ScratchReveal";
+import { Rsvp } from "./Rsvp";
 import { Footer } from "./Footer";
 
 type SectionsProps = {
   content: Content;
   lang: Lang;
+  guestLine?: string;
 };
 
-export function Sections({ content, lang }: SectionsProps) {
+export function Sections({ content, lang, guestLine }: SectionsProps) {
   const { sections, event, couple, defaultLanguage } = content;
   const eventTitle = `${couple.partner1} & ${couple.partner2}`;
 
@@ -91,9 +94,25 @@ export function Sections({ content, lang }: SectionsProps) {
               />
             );
           case "scratchReveal":
+            return (
+              <ScratchReveal
+                key={index}
+                section={section}
+                eventDateTime={event.dateTime}
+                lang={lang}
+                defaultLanguage={defaultLanguage}
+              />
+            );
           case "rsvp":
-            // Built in M3.
-            return null;
+            return (
+              <Rsvp
+                key={index}
+                section={section}
+                guestLine={guestLine}
+                lang={lang}
+                defaultLanguage={defaultLanguage}
+              />
+            );
         }
       })}
     </div>

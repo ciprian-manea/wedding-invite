@@ -7,6 +7,7 @@ export const theme = {
     accent: "#7E8F6E",
     accentSoft: "#C9D1BC",
     gold: "#B89B6A",
+    error: "#B3443A",
   },
   radius: {
     card: "20px",
@@ -26,6 +27,7 @@ export const themeCssVars: Record<string, string> = {
   "--color-accent": theme.color.accent,
   "--color-accent-soft": theme.color.accentSoft,
   "--color-gold": theme.color.gold,
+  "--color-error": theme.color.error,
   "--radius-card": theme.radius.card,
   "--ease-soft": theme.ease.soft,
 };

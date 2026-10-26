@@ -33,10 +33,10 @@ typecheck + lint + build passing, a mobile-qa run, and a commit.
 
 ## M3 · Interactive sections and languages
 
-- [ ] Scratch reveal with confetti
-- [ ] RSVP form UI (prefilled name, validation, thank-you state)
-- [ ] Language switch everywhere, `?lang=` support, `<html lang>` updated
-- [ ] `tests/i18n.spec.ts`
+- [x] Scratch reveal with confetti
+- [x] RSVP form UI (prefilled name, validation, thank-you state)
+- [x] Language switch everywhere, `?lang=` support, `<html lang>` updated
+- [x] `tests/i18n.spec.ts`
 - **Accept:** full mobile-qa checklist passes.
 
 ## M4 · Polish, performance, preview deploy

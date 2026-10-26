@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
+import { LanguageSwitch } from "@/components/ui/LanguageSwitch";
 import type { Lang } from "@/lib/content/schema";
 
 type EnvelopeProps = {
@@ -63,27 +64,14 @@ export function Envelope({
       />
 
       <div
-        className="absolute inset-x-0 flex justify-center gap-3 font-sans text-xs uppercase tracking-[0.15em]"
+        className="absolute inset-x-0 flex justify-center"
         style={{ top: "max(env(safe-area-inset-top), 16px)" }}
       >
-        {languages.map((l) => (
-          <button
-            key={l}
-            type="button"
-            onClick={(event) => {
-              event.stopPropagation();
-              onLangChange(l);
-            }}
-            aria-pressed={l === lang}
-            className={`flex min-h-11 min-w-11 items-center justify-center px-2 ${
-              l === lang
-                ? "text-[var(--color-accent)]"
-                : "text-[var(--color-ink-soft)]"
-            }`}
-          >
-            {l.toUpperCase()}
-          </button>
-        ))}
+        <LanguageSwitch
+          languages={languages}
+          lang={lang}
+          onChange={onLangChange}
+        />
       </div>
 
       <div className="absolute inset-x-0 bottom-[18%] flex flex-col items-center gap-3 px-8 text-center">
