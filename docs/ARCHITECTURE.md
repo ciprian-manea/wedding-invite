@@ -1,19 +1,21 @@
 # Architecture
 
 ## Stack (approved dependencies)
-| Purpose | Package |
-| --- | --- |
-| Framework | `next` (latest, App Router), `react`, TypeScript strict |
-| Styling | `tailwindcss` (v4) with CSS variables for theme tokens |
-| Animation | `motion` (import from "motion/react") |
-| Validation | `zod` |
-| Confetti | `canvas-confetti` |
-| Fonts | `next/font/google`: Cormorant Garamond, Pinyon Script, Jost (self-hosted at build) |
-| Dev | `prettier`, `eslint` (from create-next-app), `@playwright/test` |
+
+| Purpose    | Package                                                                            |
+| ---------- | ---------------------------------------------------------------------------------- |
+| Framework  | `next` (latest, App Router), `react`, TypeScript strict                            |
+| Styling    | `tailwindcss` (v4) with CSS variables for theme tokens                             |
+| Animation  | `motion` (import from "motion/react")                                              |
+| Validation | `zod`                                                                              |
+| Confetti   | `canvas-confetti`                                                                  |
+| Fonts      | `next/font/google`: Cormorant Garamond, Pinyon Script, Jost (self-hosted at build) |
+| Dev        | `prettier`, `eslint` (from create-next-app), `@playwright/test`                    |
 
 Anything else: ask first and log it in docs/DECISIONS.md.
 
 ## Folders
+
 ```text
 app/
   layout.tsx              fonts, <html lang>, metadata (noindex)
@@ -26,12 +28,15 @@ components/
     OpeningVideo.tsx      the <video> layer
     MusicController.tsx   Web Audio fade, mute button, visibility pause
   sections/               one file per section (Cover, Countdown, Story, Schedule, Venue,
-                          DressCode, Gifts, ScratchReveal, Rsvp, Footer)
+                          DressCode, Gifts, ScratchReveal, Rsvp, Footer), plus
+                          Sections.tsx (dispatches content.sections to the right component)
   ui/                     Reveal (scroll-in wrapper), SectionTitle, Ornament, Button
 lib/
   content/schema.ts       Zod schema + inferred types
   content/load.ts         reads and validates content/<slug>.json (server only)
   i18n.ts                 t(texts, lang) helper and UI strings per language
+  date.ts                 formatEventDate() and the Countdown's getTimeRemaining()
+  useReducedMotion.ts     the only safe way to read prefers-reduced-motion (see docs/DECISIONS.md)
   ics.ts                  builds an .ics file and a Google Calendar URL
 designs/
   jardin-blanc/theme.ts   colors, fonts, radii, motion timings for this design
@@ -49,6 +54,7 @@ tests/                    Playwright tests
 ```
 
 ## Data flow
+
 1. `app/demo/page.tsx` (server component) calls `loadContent("demo")`, which validates the JSON with Zod.
 2. It reads `searchParams.to` (guest line) and `searchParams.lang`, then passes plain props to `<Invitation>`.
 3. `<Invitation>` (client component) owns the phase state and renders Envelope, OpeningVideo, MusicController and the sections.
@@ -57,6 +63,7 @@ tests/                    Playwright tests
 Later the loader will read a guest by token instead of `?to=`. Keep the loader the only place that knows where content comes from.
 
 ## Theme
+
 Each design exports a `theme` object; `<Invitation>` writes it to CSS variables on its root
 (`--color-paper`, `--color-ink`, `--color-accent`, `--font-script`, …). Components use only the variables,
 so a new design is a new theme file + media, not new components.

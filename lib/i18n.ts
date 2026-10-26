@@ -11,6 +11,16 @@ type UiStrings = {
   unmute: string;
   scroll: string;
   loading: string;
+  todayLabel: string;
+  days: string;
+  hours: string;
+  minutes: string;
+  seconds: string;
+  copyLabel: string;
+  copiedLabel: string;
+  openInMaps: string;
+  addToCalendar: string;
+  googleCalendarLabel: string;
 };
 
 export const uiStrings: Record<Lang, UiStrings> = {
@@ -20,6 +30,16 @@ export const uiStrings: Record<Lang, UiStrings> = {
     unmute: "Pornește muzica",
     scroll: "Derulează",
     loading: "Se încarcă…",
+    todayLabel: "Astăzi este marea zi",
+    days: "zile",
+    hours: "ore",
+    minutes: "minute",
+    seconds: "secunde",
+    copyLabel: "Copiază",
+    copiedLabel: "Copiat!",
+    openInMaps: "Deschide în Maps",
+    addToCalendar: "Adaugă în calendar",
+    googleCalendarLabel: "Google Calendar",
   },
   ru: {
     skip: "Пропустить",
@@ -27,6 +47,16 @@ export const uiStrings: Record<Lang, UiStrings> = {
     unmute: "Включить музыку",
     scroll: "Прокрутите",
     loading: "Загрузка…",
+    todayLabel: "Сегодня важный день",
+    days: "дни",
+    hours: "часы",
+    minutes: "минуты",
+    seconds: "секунды",
+    copyLabel: "Копировать",
+    copiedLabel: "Скопировано!",
+    openInMaps: "Открыть на карте",
+    addToCalendar: "Добавить в календарь",
+    googleCalendarLabel: "Google Calendar",
   },
   en: {
     skip: "Skip",
@@ -34,5 +64,15 @@ export const uiStrings: Record<Lang, UiStrings> = {
     unmute: "Unmute music",
     scroll: "Scroll",
     loading: "Loading…",
+    todayLabel: "Today is the day",
+    days: "days",
+    hours: "hours",
+    minutes: "minutes",
+    seconds: "seconds",
+    copyLabel: "Copy",
+    copiedLabel: "Copied!",
+    openInMaps: "Open in Maps",
+    addToCalendar: "Add to calendar",
+    googleCalendarLabel: "Google Calendar",
   },
 };

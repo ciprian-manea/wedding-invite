@@ -1,14 +1,18 @@
 "use client";
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { themeCssVars } from "@/designs/jardin-blanc/theme";
 import { t, uiStrings } from "@/lib/i18n";
-import type { Content, Lang } from "@/lib/content/schema";
+import { formatEventDate } from "@/lib/date";
+import type { Content, Lang, Section } from "@/lib/content/schema";
+import { Cover } from "@/components/sections/Cover";
+import { Sections } from "@/components/sections/Sections";
 import { Envelope } from "./Envelope";
 import { OpeningVideo } from "./OpeningVideo";
 import { MusicController, type MusicControllerHandle } from "./MusicController";
+
+type CoverSection = Extract<Section, { type: "cover" }>;
 
 type InvitationProps = {
   content: Content;
@@ -82,8 +86,19 @@ function waitForReady(
 }
 
 export function Invitation({ content, lang, guestLine }: InvitationProps) {
-  const { couple, greeting, defaultLanguage, languages, design, music } =
-    content;
+  const {
+    couple,
+    greeting,
+    defaultLanguage,
+    languages,
+    design,
+    music,
+    event,
+    sections,
+  } = content;
+  const coverSection = sections.find(
+    (section): section is CoverSection => section.type === "cover",
+  );
 
   const [currentLang, setCurrentLang] = useState(lang);
   const [machinePhase, setPhase] = useState<Phase>("idle");
@@ -205,38 +220,23 @@ export function Invitation({ content, lang, guestLine }: InvitationProps) {
       className="relative min-h-screen bg-[var(--color-paper-deep)]"
     >
       <main className="relative z-10 mx-auto min-h-screen w-full max-w-[430px] overflow-hidden bg-[var(--color-paper)]">
-        <div className="relative flex min-h-screen flex-col items-center justify-end">
-          <Image
-            src={lastFrameSrc}
-            alt=""
-            fill
-            sizes="430px"
-            className="object-cover object-center"
+        {coverSection && (
+          <Cover
+            lastFrameSrc={lastFrameSrc}
+            partner1={couple.partner1}
+            partner2={couple.partner2}
+            subtitle={t(coverSection.subtitle, currentLang, defaultLanguage)}
+            quote={
+              coverSection.quote
+                ? t(coverSection.quote, currentLang, defaultLanguage)
+                : undefined
+            }
+            dateLabel={formatEventDate(event.dateTime, currentLang)}
+            scrollHintLabel={strings.scroll}
+            revealed={phase === "revealed"}
           />
-          <div className="relative z-10 flex w-full flex-col items-center gap-3 bg-gradient-to-t from-[var(--color-paper)] via-[var(--color-paper)]/85 to-transparent px-8 pb-16 pt-40 text-center">
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={phase === "revealed" ? { opacity: 1, y: 0 } : undefined}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="font-[family-name:var(--font-script)] text-5xl text-[var(--color-accent)]"
-            >
-              {couple.partner1} &amp; {couple.partner2}
-            </motion.h1>
-            <p className="font-serif text-lg text-[var(--color-ink)]">
-              {t(greeting.invitedLine, currentLang, defaultLanguage)}
-            </p>
-            {phase === "revealed" && (
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8, duration: 0.6 }}
-                className="mt-6 font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)]"
-              >
-                {strings.scroll}
-              </motion.p>
-            )}
-          </div>
-        </div>
+        )}
+        <Sections content={content} lang={currentLang} />
       </main>
 
       <AnimatePresence>

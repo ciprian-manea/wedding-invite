@@ -26,9 +26,9 @@ typecheck + lint + build passing, a mobile-qa run, and a commit.
 
 ## M2 · Content sections
 
-- [ ] `Reveal`, `SectionTitle`, `Ornament` UI pieces
-- [ ] Cover (letter animation, slow zoom, petals), Countdown, Story, Schedule (drawn line), Venue + `lib/ics.ts`, Dress code, Gifts (copy IBAN), Footer
-- [ ] `tests/content.spec.ts`
+- [x] `Reveal`, `SectionTitle`, `Ornament` UI pieces
+- [x] Cover (letter animation, slow zoom, petals), Countdown, Story, Schedule (drawn line), Venue + `lib/ics.ts`, Dress code, Gifts (copy IBAN), Footer
+- [x] `tests/content.spec.ts`
 - **Accept:** every section screenshot at 390×844 in ro; no layout shift.
 
 ## M3 · Interactive sections and languages
