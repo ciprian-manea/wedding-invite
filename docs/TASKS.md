@@ -63,7 +63,7 @@ typecheck + lint + build passing, a mobile-qa run, and a commit.
 
 ## M5 · Real assets
 
-- [ ] Owner puts masters in `assets-src/jardin-blanc/`
-- [ ] `/encode-media jardin-blanc`; check sizes and the first/last-frame match
-- [ ] Tune overlay position to the real envelope art
+- [x] Owner puts masters in `assets-src/jardin-blanc/`
+- [x] `/encode-media jardin-blanc`; check sizes and the first/last-frame match
+- [x] Tune overlay position to the real envelope art
 - **Accept:** handoff invisible on both phones with the real video.
