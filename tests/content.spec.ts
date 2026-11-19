@@ -14,7 +14,7 @@ test.describe("content sections", () => {
     await skipOpening(page);
   });
 
-  test("every M2 section renders with its localized heading, no console errors beyond missing art", async ({
+  test("every M2 section renders with its localized heading, no console errors", async ({
     page,
   }) => {
     const consoleErrors: string[] = [];
@@ -43,12 +43,7 @@ test.describe("content sections", () => {
     ).toBeVisible();
     await expect(page.getByText("Cu drag, Valeria și Oleg")).toBeVisible();
 
-    // The only acceptable console errors at this stage are 404s for
-    // illustration assets the art track hasn't produced yet (M5).
-    const unexpected = consoleErrors.filter(
-      (text) => !text.includes("404") && !text.includes("illustrations/"),
-    );
-    expect(unexpected).toEqual([]);
+    expect(consoleErrors).toEqual([]);
   });
 
   test("countdown digits and venue calendar links are present", async ({

@@ -72,7 +72,7 @@
       },
       "photos": [
         {
-          "src": "/media/jardin-blanc/illustrations/story-1.webp",
+          "src": "https://cdn.wedissimo.com/2024/02/FionaWalsh2.jpg",
           "alt": {
             "ro": "Prima întâlnire",
             "ru": "Первая встреча",
@@ -80,7 +80,7 @@
           }
         },
         {
-          "src": "/media/jardin-blanc/illustrations/story-2.webp",
+          "src": "https://www.brides.com/thmb/Bh3DGsr-KkrnIcej8dWy3rrP88A=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(1999x0:2001x2)/grace-travis_08-db03e2bf6b0245b2a727dbe0d5119f49.jpg",
           "alt": { "ro": "Logodna", "ru": "Помолвка", "en": "The proposal" }
         }
       ]
@@ -153,7 +153,7 @@
           "name": "Orangeria Jardin Blanc",
           "address": "Str. Florilor 12, Chișinău",
           "mapsUrl": "https://maps.google.com/?q=Orangeria+Jardin+Blanc",
-          "image": "/media/jardin-blanc/illustrations/venue.webp",
+          "image": "https://www.v3events.in/wp-content/uploads/2023/01/o.jpeg",
           "addToCalendar": true
         }
       ]
