@@ -18,7 +18,7 @@ Until real art exists, `bash scripts/make-placeholder-media.sh` creates working 
 | `open-720.mp4` | same at 720×1280, CRF 26, ≈ 1–1.5 MB |
 | `poster.jpg` | first frame of `open-1080.mp4`, 1080×1920; serve with `next/image` (it makes AVIF/WebP) and `priority` |
 | `last-frame.jpg` | last frame of `open-1080.mp4`, 1080×1920; same handling |
-| `music.m4a` | AAC 128 kb/s, normalized to −16 LUFS, 1 s fade in/out at the loop ends |
+| `music.m4a` | AAC 128 kb/s, fixed gain to −16 LUFS, trailing silence cut, last 4 s crossfaded into the start for a seamless loop (`LOOP_XFADE`) |
 | `music.mp3` | optional 128 kb/s fallback, made only if ffmpeg has libmp3lame |
 
 Check sizes after encoding; if `open-1080.mp4` > 4 MB, raise CRF by 2 and re-run.
