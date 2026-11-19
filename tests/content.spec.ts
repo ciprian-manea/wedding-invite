@@ -24,7 +24,10 @@ test.describe("content sections", () => {
 
     await page.goto("/demo?to=Drag%C4%83%20Ciprian%20%C8%99i%20Anastasia&lang=ro");
 
-    await expect(page.getByText("Dragii noștri Ciprian și Anastasia")).toBeVisible();
+    await expect(page.getByText("Dragii noștri")).toBeVisible();
+    await expect(
+      page.getByText("Ciprian și Anastasia", { exact: true }),
+    ).toBeVisible();
     await expect(
       page.getByRole("heading", { name: "Până la marea zi" }),
     ).toBeVisible();

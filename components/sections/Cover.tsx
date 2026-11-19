@@ -207,17 +207,34 @@ export function Cover({
           ))}
         </h1>
         {guestNames && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={revealed ? { opacity: 1 } : undefined}
-            transition={{ delay: 0.5, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="font-serif text-lg text-[var(--color-ink)]"
-          >
-            {dearLabel && <span>{dearLabel} </span>}
-            <span className="font-[family-name:var(--font-script),var(--font-serif)] text-xl text-[var(--color-accent)]">
+          <div className="flex flex-col items-center gap-1">
+            {dearLabel && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={revealed ? { opacity: 1 } : undefined}
+                transition={{
+                  delay: 0.5,
+                  duration: 0.6,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="font-serif text-lg text-[var(--color-ink)]"
+              >
+                {dearLabel}
+              </motion.p>
+            )}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={revealed ? { opacity: 1 } : undefined}
+              transition={{
+                delay: 0.58,
+                duration: 0.6,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="font-[family-name:var(--font-script),var(--font-serif)] text-2xl text-[var(--color-accent)]"
+            >
               {guestNames}
-            </span>
-          </motion.p>
+            </motion.p>
+          </div>
         )}
         <motion.p
           initial={{ opacity: 0 }}
