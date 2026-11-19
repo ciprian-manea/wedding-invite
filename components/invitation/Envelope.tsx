@@ -7,7 +7,10 @@ import type { Lang } from "@/lib/content/schema";
 
 type EnvelopeProps = {
   posterSrc: string;
-  guestLine: string;
+  guestLine?: string;
+  genericGreeting: string;
+  dearLabel?: string;
+  guestNames?: string;
   invitedLine: string;
   tapToOpenLabel: string;
   loadingLabel: string;
@@ -22,6 +25,9 @@ type EnvelopeProps = {
 export function Envelope({
   posterSrc,
   guestLine,
+  genericGreeting,
+  dearLabel,
+  guestNames,
   invitedLine,
   tapToOpenLabel,
   loadingLabel,
@@ -75,9 +81,26 @@ export function Envelope({
       </div>
 
       <div className="absolute inset-x-0 bottom-[18%] flex flex-col items-center gap-3 px-8 text-center">
-        <p className="font-serif text-xl text-[var(--color-ink)]">
-          {guestLine}
-        </p>
+        {guestLine ? (
+          <p className="font-serif text-xl text-[var(--color-ink)]">
+            {guestLine}
+          </p>
+        ) : guestNames ? (
+          <div className="flex flex-col items-center gap-1">
+            {dearLabel && (
+              <p className="font-[family-name:var(--font-display),var(--font-serif)] text-lg text-[var(--color-ink)]">
+                {dearLabel}
+              </p>
+            )}
+            <p className="font-[family-name:var(--font-display),var(--font-serif)] text-2xl text-[var(--color-accent)] italic">
+              {guestNames}
+            </p>
+          </div>
+        ) : (
+          <p className="font-serif text-xl text-[var(--color-ink)]">
+            {genericGreeting}
+          </p>
+        )}
         <p className="font-serif text-base text-[var(--color-ink-soft)]">
           {invitedLine}
         </p>

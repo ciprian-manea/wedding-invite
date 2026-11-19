@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Pinyon_Script, Jost } from "next/font/google";
+import {
+  Cormorant_Garamond,
+  Pinyon_Script,
+  Jost,
+  Playfair_Display,
+} from "next/font/google";
 import "./globals.css";
 
 const fontSerif = Cormorant_Garamond({
@@ -20,6 +25,13 @@ const fontSans = Jost({
   weight: ["400", "500"],
 });
 
+const fontDisplay = Playfair_Display({
+  variable: "--font-display",
+  subsets: ["latin", "cyrillic"],
+  weight: ["500", "600"],
+  style: ["normal", "italic"],
+});
+
 const siteUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
@@ -38,7 +50,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="ro"
-      className={`${fontSerif.variable} ${fontScript.variable} ${fontSans.variable} h-full antialiased`}
+      className={`${fontSerif.variable} ${fontScript.variable} ${fontSans.variable} ${fontDisplay.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

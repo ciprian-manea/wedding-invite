@@ -15,9 +15,10 @@ white roses and soft greenery, light and airy, romantic and calm. Our own artwor
 | `--color-accent-soft` | `#C9D1BC`                      | dividers, outlines            |
 | `--color-gold`        | `#B89B6A`                      | fine lines and ornaments only |
 | `--color-error`       | `#B3443A`                      | form validation messages only |
-| `--font-script`       | Pinyon Script                  | names, section titles         |
+| `--font-script`       | Pinyon Script                  | couple's names, section titles |
 | `--font-serif`        | Cormorant Garamond             | body text                     |
 | `--font-sans`         | Jost                           | small caps labels, buttons    |
+| `--font-display`      | Playfair Display                | guest-names message (envelope, italic) |
 | `--radius-card`       | 20px                           | cards                         |
 | `--ease-soft`         | cubic-bezier(0.22, 1, 0.36, 1) | all reveals                   |
 

@@ -9,7 +9,7 @@
 | Animation  | `motion` (import from "motion/react")                                              |
 | Validation | `zod`                                                                              |
 | Confetti   | `canvas-confetti`                                                                  |
-| Fonts      | `next/font/google`: Cormorant Garamond, Pinyon Script, Jost (self-hosted at build) |
+| Fonts      | `next/font/google`: Cormorant Garamond, Pinyon Script, Jost, Playfair Display (self-hosted at build) |
 | Dev        | `prettier`, `eslint` (from create-next-app), `@playwright/test`                    |
 
 Anything else: ask first and log it in docs/DECISIONS.md.

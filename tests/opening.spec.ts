@@ -1,5 +1,17 @@
 import { test, expect } from "@playwright/test";
 
+test("without a ?to= override, the envelope shows content.json's guest names", async ({
+  page,
+}) => {
+  await page.goto("/demo");
+
+  const envelope = page.getByTestId("envelope");
+  await expect(envelope.getByText("Dragii noștri")).toBeVisible();
+  await expect(
+    envelope.getByText("Ciprian și Anastasia", { exact: true }),
+  ).toBeVisible();
+});
+
 test("tap opens the envelope, plays the video, starts music and reveals the page", async ({
   page,
 }) => {

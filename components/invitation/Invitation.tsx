@@ -270,9 +270,18 @@ export function Invitation({ content, lang, guestLine }: InvitationProps) {
           >
             <Envelope
               posterSrc={posterSrc}
-              guestLine={
-                guestLine ?? t(greeting.generic, currentLang, defaultLanguage)
+              guestLine={guestLine}
+              genericGreeting={t(
+                greeting.generic,
+                currentLang,
+                defaultLanguage,
+              )}
+              dearLabel={
+                greeting.dear
+                  ? t(greeting.dear, currentLang, defaultLanguage)
+                  : undefined
               }
+              guestNames={greeting.guestNames}
               invitedLine={t(
                 greeting.invitedLine,
                 currentLang,
