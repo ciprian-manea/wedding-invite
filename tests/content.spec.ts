@@ -41,7 +41,6 @@ test.describe("content sections", () => {
     await expect(
       page.getByRole("heading", { name: "Codul vestimentar" }),
     ).toBeVisible();
-    await expect(page.getByRole("heading", { name: "Cadouri" })).toBeVisible();
     await expect(page.getByText("Cu drag, Valeria și Oleg")).toBeVisible();
 
     // The only acceptable console errors at this stage are 404s for
@@ -69,14 +68,5 @@ test.describe("content sections", () => {
     await expect(
       page.getByRole("link", { name: "Google Calendar" }),
     ).toHaveAttribute("href", /calendar\.google\.com/);
-  });
-
-  test("copying the IBAN shows the copied toast", async ({ page }) => {
-    // WebKit (the "iPhone 15" project) has no grantable clipboard permission;
-    // the write is allowed by default for a trusted click in this context.
-    await page.goto("/demo?to=Drag%C4%83%20Ciprian%20%C8%99i%20Anastasia&lang=ro");
-
-    await page.getByRole("button", { name: "Copiază" }).click();
-    await expect(page.getByText("Copiat!")).toBeVisible();
   });
 });

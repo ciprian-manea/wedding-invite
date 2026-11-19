@@ -173,17 +173,6 @@
       "palette": ["#F7F2E8", "#C9D1BC", "#667359", "#B89B6A"]
     },
     {
-      "type": "gifts",
-      "title": { "ro": "Cadouri", "ru": "Подарки", "en": "Gifts" },
-      "text": {
-        "ro": "Prezența voastră este cel mai de preț cadou. Dacă doriți totuși să ne susțineți:",
-        "ru": "Ваше присутствие — самый ценный подарок. Но если хотите поддержать нас:",
-        "en": "Your presence is the greatest gift. If you'd still like to contribute:"
-      },
-      "iban": "MD24AG000000002230999RO",
-      "holder": "Valeria & Oleg"
-    },
-    {
       "type": "scratchReveal",
       "title": { "ro": "Data", "ru": "Дата", "en": "The date" },
       "hint": { "ro": "Răzuiește", "ru": "Сотрите", "en": "Scratch" }
