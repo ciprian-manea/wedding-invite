@@ -198,25 +198,40 @@ export function Invitation({ content, lang, guestLine }: InvitationProps) {
     }
 
     const video = videoRef.current;
-    if (video && video.readyState < 3) {
-      setPhase("loading");
-      const ready = await waitForReady(video, SLOW_NETWORK_TIMEOUT_MS);
-      if (!ready) {
-        setPhase("revealed");
-        return;
-      }
+    if (!video) {
+      setPhase("revealed");
+      return;
     }
 
-    setPhase("opening");
+    // Call play() right away, inside the tap. Mobile browsers (iOS Safari
+    // above all) ignore preload="auto" and only fetch metadata, so readyState
+    // stays < 3 until play() is called; waiting for "canplay" first would
+    // never start the download and always hit the slow-network timeout.
+    const playPromise = video.play();
+    // Avoid an unhandled rejection if we pause it on the slow-network path.
+    playPromise.catch(() => {});
+    const ready = video.readyState >= 3;
+    setPhase(ready ? "opening" : "loading");
+
+    if (!ready) {
+      const readyInTime = await waitForReady(video, SLOW_NETWORK_TIMEOUT_MS);
+      if (!readyInTime) {
+        video.pause();
+        finishOpening();
+        return;
+      }
+      setPhase("opening");
+    }
+
     timersRef.current.skip = window.setTimeout(
       () => setSkipVisible(true),
       SKIP_DELAY_MS,
     );
 
     try {
-      await videoRef.current?.play();
+      await playPromise;
     } catch {
-      setPhase("revealed");
+      finishOpening();
     }
   }
 
