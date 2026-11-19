@@ -14,7 +14,7 @@ interface Content {
   design: "jardin-blanc";
   languages: Lang[];                 // order = order in the switch
   defaultLanguage: Lang;
-  couple: { partner1: string; partner2: string; monogram: string };   // monogram "A&I"
+  couple: { partner1: string; partner2: string; monogram: string };   // monogram "V&O"
   greeting: { generic: Localized; invitedLine: Localized; tapToOpen: Localized };
   event: {
     dateTime: string;                // ISO with offset, "2027-06-12T15:00:00+03:00"
@@ -45,7 +45,7 @@ type Section =
   "design": "jardin-blanc",
   "languages": ["ro", "ru", "en"],
   "defaultLanguage": "ro",
-  "couple": { "partner1": "Ana", "partner2": "Ion", "monogram": "A&I" },
+  "couple": { "partner1": "Valeria", "partner2": "Oleg", "monogram": "V&O" },
   "greeting": {
     "generic": { "ro": "Dragi invitați", "ru": "Дорогие гости", "en": "Dear guests" },
     "invitedLine": { "ro": "sunteți invitați la nunta noastră", "ru": "приглашаем вас на нашу свадьбу", "en": "you are invited to our wedding" },
@@ -58,7 +58,7 @@ type Section =
     { "type": "countdown", "title": { "ro": "Până la marea zi", "ru": "До большого дня", "en": "Until the big day" } },
     { "type": "scratchReveal", "title": { "ro": "Data", "ru": "Дата", "en": "The date" }, "hint": { "ro": "Răzuiește", "ru": "Сотрите", "en": "Scratch" } },
     { "type": "rsvp", "title": { "ro": "Confirmare", "ru": "Подтверждение", "en": "RSVP" }, "text": { "ro": "Vă rugăm să confirmați până la 20 mai", "ru": "Пожалуйста, подтвердите до 20 мая", "en": "Please reply by 20 May" }, "askAllergies": true, "askSong": true, "maxSeats": 4 },
-    { "type": "footer", "text": { "ro": "Cu drag, Ana și Ion", "ru": "С любовью, Анна и Ион", "en": "With love, Ana & Ion" } }
+    { "type": "footer", "text": { "ro": "Cu drag, Valeria și Oleg", "ru": "С любовью, Валерия и Олег", "en": "With love, Valeria & Oleg" } }
   ]
 }
 ```

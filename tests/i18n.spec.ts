@@ -11,7 +11,7 @@ test.describe("languages", () => {
     page,
   }) => {
     await skipOpening(page);
-    await page.goto("/demo?to=Drag%C4%83%20Vasile&lang=ru");
+    await page.goto("/demo?to=Drag%C4%83%20Ciprian%20%C8%99i%20Anastasia&lang=ru");
 
     await expect(
       page.getByRole("heading", { name: "До большого дня" }),
@@ -22,7 +22,7 @@ test.describe("languages", () => {
   test("switching language on the envelope (before tap) updates the greeting and <html lang>", async ({
     page,
   }) => {
-    await page.goto("/demo?to=Drag%C4%83%20Vasile&lang=ro");
+    await page.goto("/demo?to=Drag%C4%83%20Ciprian%20%C8%99i%20Anastasia&lang=ro");
 
     await expect(
       page.getByText("sunteți invitați la nunta noastră"),
@@ -41,7 +41,7 @@ test.describe("languages", () => {
     page,
   }) => {
     await skipOpening(page);
-    await page.goto("/demo?to=Drag%C4%83%20Vasile&lang=ro");
+    await page.goto("/demo?to=Drag%C4%83%20Ciprian%20%C8%99i%20Anastasia&lang=ro");
 
     await expect(
       page.getByRole("heading", { name: "Programul zilei" }),
@@ -68,9 +68,9 @@ test.describe("languages", () => {
     page,
   }) => {
     await skipOpening(page);
-    await page.goto("/demo?to=Drag%C4%83%20Vasile&lang=ro");
+    await page.goto("/demo?to=Drag%C4%83%20Ciprian%20%C8%99i%20Anastasia&lang=ro");
 
     const nameInput = page.getByLabel("Numele tău");
-    await expect(nameInput).toHaveValue("Dragă Vasile");
+    await expect(nameInput).toHaveValue("Dragă Ciprian și Anastasia");
   });
 });

@@ -7,7 +7,7 @@ A change is done only when you can show evidence: command output or screenshots.
 - Look at it at 390×844 with the Playwright MCP (configured as iPhone 15) and take a screenshot.
 
 ## Every milestone (use the `mobile-qa` subagent)
-1. Open `/demo?to=Dragă%20Vasile`. Screenshot the envelope: name visible, "tap to open" visible, nothing cut off.
+1. Open `/demo?to=Dragă%20Ciprian%20și%20Anastasia`. Screenshot the envelope: name visible, "tap to open" visible, nothing cut off.
 2. Tap the envelope. Screenshots at +0.5 s, +4 s and after the video ends.
 3. Confirm: no black frame between envelope and video, no jump between video and page, scroll works after reveal.
 4. Scroll through every section; screenshot each.

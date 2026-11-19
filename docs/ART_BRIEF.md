@@ -40,7 +40,7 @@ All vertical 9:16, at least 1080×1920 (generate larger, then upscale). Same cam
 2. Upscale to at least 1080×1920 (the tool's upscaler, or a dedicated one).
 3. Retouch in Photoshop, Affinity or Photopea (free): clean the seal, fix odd petals, keep the empty areas empty.
 4. **Seal monogram:** AI tools garble letters. Ask Claude Code for the couple's monogram as an SVG
-   (`/art monogram A&I`), then place it on the seal in your editor, slightly embossed.
+   (`/art monogram V&O`), then place it on the seal in your editor, slightly embossed.
 5. Save into `assets-src/jardin-blanc/frames/` and run `/art review` so Claude checks the frames match.
 
 ## Video clips (image-to-video)

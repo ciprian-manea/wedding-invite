@@ -22,7 +22,7 @@ test.describe("content sections", () => {
       if (message.type() === "error") consoleErrors.push(message.text());
     });
 
-    await page.goto("/demo?to=Drag%C4%83%20Vasile&lang=ro");
+    await page.goto("/demo?to=Drag%C4%83%20Ciprian%20%C8%99i%20Anastasia&lang=ro");
 
     await expect(
       page.getByRole("heading", { name: "Până la marea zi" }),
@@ -38,7 +38,7 @@ test.describe("content sections", () => {
       page.getByRole("heading", { name: "Codul vestimentar" }),
     ).toBeVisible();
     await expect(page.getByRole("heading", { name: "Cadouri" })).toBeVisible();
-    await expect(page.getByText("Cu drag, Ana și Ion")).toBeVisible();
+    await expect(page.getByText("Cu drag, Valeria și Oleg")).toBeVisible();
 
     // The only acceptable console errors at this stage are 404s for
     // illustration assets the art track hasn't produced yet (M5).
@@ -51,7 +51,7 @@ test.describe("content sections", () => {
   test("countdown digits and venue calendar links are present", async ({
     page,
   }) => {
-    await page.goto("/demo?to=Drag%C4%83%20Vasile&lang=ro");
+    await page.goto("/demo?to=Drag%C4%83%20Ciprian%20%C8%99i%20Anastasia&lang=ro");
 
     await expect(page.getByText("zile", { exact: true })).toBeVisible();
     await expect(page.getByText("ore", { exact: true })).toBeVisible();
@@ -70,7 +70,7 @@ test.describe("content sections", () => {
   test("copying the IBAN shows the copied toast", async ({ page }) => {
     // WebKit (the "iPhone 15" project) has no grantable clipboard permission;
     // the write is allowed by default for a trusted click in this context.
-    await page.goto("/demo?to=Drag%C4%83%20Vasile&lang=ro");
+    await page.goto("/demo?to=Drag%C4%83%20Ciprian%20%C8%99i%20Anastasia&lang=ro");
 
     await page.getByRole("button", { name: "Copiază" }).click();
     await expect(page.getByText("Copiat!")).toBeVisible();
@@ -84,7 +84,7 @@ test.describe("content sections", () => {
       ["ru", "До большого дня"],
       ["en", "Until the big day"],
     ] as const) {
-      await page.goto(`/demo?to=Drag%C4%83%20Vasile&lang=${lang}`);
+      await page.goto(`/demo?to=Drag%C4%83%20Ciprian%20%C8%99i%20Anastasia&lang=${lang}`);
       await expect(page.getByRole("heading", { name: heading })).toBeVisible();
     }
   });

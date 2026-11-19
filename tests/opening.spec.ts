@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 test("tap opens the envelope, plays the video, starts music and reveals the page", async ({
   page,
 }) => {
-  await page.goto("/demo?to=Dragă%20Vasile");
+  await page.goto("/demo?to=Dragă%20Ciprian%20și%20Anastasia");
 
   const envelope = page.getByTestId("envelope");
   await expect(envelope).toBeVisible();

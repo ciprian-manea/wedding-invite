@@ -3,7 +3,7 @@
   "design": "jardin-blanc",
   "languages": ["ro", "ru", "en"],
   "defaultLanguage": "ro",
-  "couple": { "partner1": "Ana", "partner2": "Ion", "monogram": "A&I" },
+  "couple": { "partner1": "Valeria", "partner2": "Oleg", "monogram": "V&O" },
   "greeting": {
     "generic": {
       "ro": "Dragi invitați",
@@ -175,7 +175,7 @@
         "en": "Your presence is the greatest gift. If you'd still like to contribute:"
       },
       "iban": "MD24AG000000002230999RO",
-      "holder": "Ana & Ion"
+      "holder": "Valeria & Oleg"
     },
     {
       "type": "scratchReveal",
@@ -197,9 +197,9 @@
     {
       "type": "footer",
       "text": {
-        "ro": "Cu drag, Ana și Ion",
-        "ru": "С любовью, Анна и Ион",
-        "en": "With love, Ana & Ion"
+        "ro": "Cu drag, Valeria și Oleg",
+        "ru": "С любовью, Валерия и Олег",
+        "en": "With love, Valeria & Oleg"
       }
     }
   ]

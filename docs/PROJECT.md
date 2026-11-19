@@ -18,7 +18,7 @@ The draft must be a reusable template: a second wedding = a new JSON file + new 
   gifts, scratch-to-reveal date, RSVP form (UI only), footer.
 - Languages: Romanian (ro), Russian (ru), English (en); guest can switch on the envelope screen.
 - One design called **Jardin Blanc** (ivory paper, white flowers, sage green seal).
-- Temporary personalisation for the draft: guest line from the URL, `/demo?to=Dragă%20Vasile`.
+- Temporary personalisation for the draft: guest line from the URL, `/demo?to=Dragă%20Ciprian%20și%20Anastasia`.
   Falls back to the generic greeting from the JSON.
 - Deploy a preview to Vercel.
 
