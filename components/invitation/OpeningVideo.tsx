@@ -12,6 +12,11 @@ type OpeningVideoProps = {
   onError: () => void;
 };
 
+// The opening video ends on a ~2 s still of the last frame (docs/ART_BRIEF.md).
+// The Cover shows that same frame as its background, so hand off once the
+// motion has settled instead of waiting out the whole still.
+const HANDOFF_BEFORE_END_S = 1.5;
+
 export const OpeningVideo = forwardRef<HTMLVideoElement, OpeningVideoProps>(
   function OpeningVideo(
     { src1080, src720, posterSrc, onFirstFrame, onEnded, onError },
@@ -65,6 +70,15 @@ export const OpeningVideo = forwardRef<HTMLVideoElement, OpeningVideoProps>(
           if (!started) {
             setStarted(true);
             onFirstFrame();
+          }
+        }}
+        onTimeUpdate={(event) => {
+          const video = event.currentTarget;
+          if (
+            Number.isFinite(video.duration) &&
+            video.duration - video.currentTime <= HANDOFF_BEFORE_END_S
+          ) {
+            onEnded();
           }
         }}
         onEnded={onEnded}

@@ -147,7 +147,7 @@ export function Cover({
   const names = `${partner1} & ${partner2}`;
 
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-end overflow-hidden">
+    <div className="relative flex min-h-svh flex-col items-center justify-end overflow-hidden">
       {/* Stays invisible until revealed: Envelope and OpeningVideo crossfade
           over each other on tap, and for a moment both are partially
           transparent. Without this, that moment lets this very different-
@@ -177,7 +177,7 @@ export function Cover({
 
       {!reducedMotion && <PetalsCanvas active={revealed} />}
 
-      <div className="relative z-20 flex w-full flex-col items-center gap-3 bg-gradient-to-t from-[var(--color-paper)] via-[var(--color-paper)]/85 to-transparent px-8 pb-16 pt-40 text-center">
+      <div className="relative z-20 flex w-full flex-col items-center gap-3 bg-gradient-to-t from-[var(--color-paper)] via-[var(--color-paper)]/85 to-transparent px-8 pt-40 pb-[max(7rem,calc(env(safe-area-inset-bottom)+5rem))] text-center">
         {/* See SectionTitle.tsx: Pinyon Script has no Cyrillic glyphs. The
             couple's names are the one place this could matter even for the
             default (Latin) demo content, if a real couple's names were
@@ -197,7 +197,7 @@ export function Cover({
               animate={revealed ? { opacity: 1, y: 0 } : undefined}
               transition={{
                 duration: 0.5,
-                delay: reducedMotion ? 0 : index * 0.04,
+                delay: reducedMotion ? 0 : index * 0.025,
                 ease: [0.22, 1, 0.36, 1],
               }}
               className="inline-block"
@@ -213,8 +213,8 @@ export function Cover({
                 initial={{ opacity: 0 }}
                 animate={revealed ? { opacity: 1 } : undefined}
                 transition={{
-                  delay: 0.5,
-                  duration: 0.6,
+                  delay: 0.3,
+                  duration: 0.5,
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 className="font-serif text-lg text-[var(--color-ink)]"
@@ -226,8 +226,8 @@ export function Cover({
               initial={{ opacity: 0 }}
               animate={revealed ? { opacity: 1 } : undefined}
               transition={{
-                delay: 0.58,
-                duration: 0.6,
+                delay: 0.35,
+                duration: 0.5,
                 ease: [0.22, 1, 0.36, 1],
               }}
               className="font-[family-name:var(--font-script),var(--font-serif)] text-2xl text-[var(--color-accent)]"
@@ -239,7 +239,7 @@ export function Cover({
         <motion.p
           initial={{ opacity: 0 }}
           animate={revealed ? { opacity: 1 } : undefined}
-          transition={{ delay: 0.65, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 0.4, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="font-serif text-lg text-[var(--color-ink)]"
         >
           {subtitle}
@@ -249,8 +249,8 @@ export function Cover({
             initial={{ opacity: 0 }}
             animate={revealed ? { opacity: 1 } : undefined}
             transition={{
-              delay: 0.8,
-              duration: 0.6,
+              delay: 0.5,
+              duration: 0.5,
               ease: [0.22, 1, 0.36, 1],
             }}
             className="font-serif text-base text-[var(--color-ink-soft)] italic"
@@ -261,7 +261,7 @@ export function Cover({
         <motion.p
           initial={{ opacity: 0 }}
           animate={revealed ? { opacity: 1 } : undefined}
-          transition={{ delay: 0.95, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 0.6, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="font-sans text-xs tracking-[0.2em] text-[var(--color-ink-soft)] uppercase"
         >
           {dateLabel}
@@ -269,7 +269,7 @@ export function Cover({
         <motion.p
           initial={{ opacity: 0 }}
           animate={revealed ? { opacity: 1 } : undefined}
-          transition={{ delay: 1.35, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 0.8, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="mt-4 font-sans text-xs tracking-[0.2em] text-[var(--color-ink-soft)] uppercase"
         >
           {scrollHintLabel}
