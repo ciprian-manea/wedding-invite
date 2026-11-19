@@ -75,17 +75,4 @@ test.describe("content sections", () => {
     await page.getByRole("button", { name: "Copiază" }).click();
     await expect(page.getByText("Copiat!")).toBeVisible();
   });
-
-  test("renders in all three languages without layout-breaking errors", async ({
-    page,
-  }) => {
-    for (const [lang, heading] of [
-      ["ro", "Până la marea zi"],
-      ["ru", "До большого дня"],
-      ["en", "Until the big day"],
-    ] as const) {
-      await page.goto(`/demo?to=Drag%C4%83%20Ciprian%20%C8%99i%20Anastasia&lang=${lang}`);
-      await expect(page.getByRole("heading", { name: heading })).toBeVisible();
-    }
-  });
 });

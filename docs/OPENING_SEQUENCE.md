@@ -3,7 +3,7 @@
 ## What the guest experiences
 1. Page loads: a full-screen closed envelope (still image). On it, as real HTML text:
    the guest line ("Dragă Ciprian și Anastasia"), a line like "you are invited", and a softly pulsing
-   "Atinge pentru a deschide" / "Нажмите, чтобы открыть" / "Tap to open". Small language switch at the top.
+   "Atinge pentru a deschide". (Language switch exists in code but is disabled, see docs/PROJECT.md.)
 2. Guest taps anywhere on the envelope.
 3. The overlay text fades out in 250 ms while the video starts. The flap lifts, the seal goes with it,
    the envelope slides down and reveals the illustrated cover scene (about 8–9 s).

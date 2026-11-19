@@ -19,7 +19,7 @@ A change is done only when you can show evidence: command output or screenshots.
 ## Playwright tests (`tests/`)
 - `opening.spec.ts`: tap → phase becomes revealed within 12 s; the video element got `play()`; body scroll unlocked.
 - `content.spec.ts`: every section in demo.json renders a heading; invalid JSON fails `loadContent`.
-- `i18n.spec.ts`: `?lang=ru` shows Russian strings.
+- `i18n.spec.ts`: language switching is disabled - no switch buttons render, `?lang=` has no effect.
 Audio can't be heard in tests; assert that the AudioContext state is "running" after the tap.
 
 ## Real devices (owner does this; Claude can't)

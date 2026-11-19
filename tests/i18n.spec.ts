@@ -1,74 +1,34 @@
-import { test, expect, type Page } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 
-async function skipOpening(page: Page) {
-  await page.addInitScript(() => {
-    sessionStorage.setItem("invitation:revealed", "1");
-  });
-}
-
+// Language switching is disabled for now: content/demo.json's `languages`
+// is ["ro"] and app/demo/page.tsx ignores `?lang=`. See docs/DECISIONS.md.
 test.describe("languages", () => {
-  test("?lang=ru loads Russian content directly, with <html lang> set", async ({
+  test("no language switch buttons render, and ?lang= has no effect", async ({
     page,
   }) => {
-    await skipOpening(page);
-    await page.goto("/demo?to=Drag%C4%83%20Ciprian%20%C8%99i%20Anastasia&lang=ru");
+    await page.goto(
+      "/demo?to=Drag%C4%83%20Ciprian%20%C8%99i%20Anastasia&lang=ru",
+    );
 
     await expect(
-      page.getByRole("heading", { name: "До большого дня" }),
-    ).toBeVisible();
-    await expect(page.locator("html")).toHaveAttribute("lang", "ru");
-  });
-
-  test("switching language on the envelope (before tap) updates the greeting and <html lang>", async ({
-    page,
-  }) => {
-    await page.goto("/demo?to=Drag%C4%83%20Ciprian%20%C8%99i%20Anastasia&lang=ro");
-
+      page.getByRole("button", { name: "RO", exact: true }),
+    ).toHaveCount(0);
+    await expect(
+      page.getByRole("button", { name: "RU", exact: true }),
+    ).toHaveCount(0);
     await expect(
       page.getByText("sunteți invitați la nunta noastră"),
     ).toBeVisible();
-
-    await page.getByRole("button", { name: "RU", exact: true }).click();
-
-    await expect(
-      page.getByText("приглашаем вас на нашу свадьбу"),
-    ).toBeVisible();
-    await expect(page.locator("html")).toHaveAttribute("lang", "ru");
-    await expect(page).toHaveURL(/lang=ru/);
-  });
-
-  test("the persistent switcher after reveal updates every section and the URL, without a reload", async ({
-    page,
-  }) => {
-    await skipOpening(page);
-    await page.goto("/demo?to=Drag%C4%83%20Ciprian%20%C8%99i%20Anastasia&lang=ro");
-
-    await expect(
-      page.getByRole("heading", { name: "Programul zilei" }),
-    ).toBeVisible();
-    // The envelope briefly coexists with the persistent switcher while its
-    // own exit animation finishes (see Invitation.tsx's hydration-safe
-    // "revealed from storage" handling), so wait for it to fully leave the
-    // DOM before relying on there being only one "EN" button.
-    await expect(page.getByTestId("envelope")).toHaveCount(0);
-
-    await page.getByRole("button", { name: "EN", exact: true }).click();
-
-    await expect(
-      page.getByRole("heading", { name: "The schedule" }),
-    ).toBeVisible();
-    await expect(
-      page.getByRole("heading", { name: "Dress code" }),
-    ).toBeVisible();
-    await expect(page.locator("html")).toHaveAttribute("lang", "en");
-    await expect(page).toHaveURL(/lang=en/);
+    await expect(page.locator("html")).toHaveAttribute("lang", "ro");
   });
 
   test("RSVP's name field is prefilled from the guest line", async ({
     page,
   }) => {
-    await skipOpening(page);
-    await page.goto("/demo?to=Drag%C4%83%20Ciprian%20%C8%99i%20Anastasia&lang=ro");
+    await page.addInitScript(() => {
+      sessionStorage.setItem("invitation:revealed", "1");
+    });
+    await page.goto("/demo?to=Drag%C4%83%20Ciprian%20%C8%99i%20Anastasia");
 
     const nameInput = page.getByLabel("Numele tău");
     await expect(nameInput).toHaveValue("Dragă Ciprian și Anastasia");

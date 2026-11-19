@@ -20,11 +20,11 @@ Anything else: ask first and log it in docs/DECISIONS.md.
 app/
   layout.tsx              fonts, <html lang>, metadata (noindex)
   page.tsx                redirects to /demo for now
-  demo/page.tsx           loads content/demo.json, reads ?to= and ?lang=, renders <Invitation>
+  demo/page.tsx           loads content/demo.json, reads ?to=, renders <Invitation>
 components/
   invitation/
     Invitation.tsx        client root: state machine idle → opening → revealed
-    Envelope.tsx          poster + name overlay + "tap to open" + language switch
+    Envelope.tsx          poster + name overlay + "tap to open" (language switch disabled, see PROJECT.md)
     OpeningVideo.tsx      the <video> layer
     MusicController.tsx   Web Audio fade, mute button, visibility pause
   sections/               one file per section (Cover, Countdown, Story, Schedule, Venue,

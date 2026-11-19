@@ -16,7 +16,8 @@ The draft must be a reusable template: a second wedding = a new JSON file + new 
 - Opening sequence: poster with the guest's name, opening video, music, hand-off to the page.
 - Sections: cover, countdown, our story, schedule, venue + add to calendar, dress code,
   gifts, scratch-to-reveal date, RSVP form (UI only), footer.
-- Languages: Romanian (ro), Russian (ru), English (en); guest can switch on the envelope screen.
+- Language: Romanian only for now. The content format and switcher UI still support ro/ru/en
+  (see docs/DECISIONS.md); switching is disabled until the owner asks for it back.
 - One design called **Jardin Blanc** (ivory paper, white flowers, sage green seal).
 - Temporary personalisation for the draft: guest line from the URL, `/demo?to=Dragă%20Ciprian%20și%20Anastasia`.
   Falls back to the generic greeting from the JSON.

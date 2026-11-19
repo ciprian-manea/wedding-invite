@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { loadContent } from "@/lib/content/load";
-import { langSchema, type Section } from "@/lib/content/schema";
+import type { Section } from "@/lib/content/schema";
 import { t } from "@/lib/i18n";
 import { Invitation } from "@/components/invitation/Invitation";
 
 type CoverSection = Extract<Section, { type: "cover" }>;
 
-// The page is personalised per request from `?to=` and `?lang=`, so it can't be
+// The page is personalised per request from `?to=`, so it can't be
 // prerendered into a static shell; let it render on the server for every request.
 export const instant = false;
 
@@ -40,17 +40,23 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 type DemoPageProps = {
-  searchParams: Promise<{ to?: string; lang?: string }>;
+  searchParams: Promise<{ to?: string }>;
 };
 
+// Language switching is disabled for now - content.languages is ["ro"], and
+// the page always renders in content.defaultLanguage regardless of the URL.
+// See docs/DECISIONS.md.
 export default async function DemoPage({ searchParams }: DemoPageProps) {
   const content = await loadContent("demo");
   const params = await searchParams;
 
-  const langResult = langSchema.safeParse(params.lang);
-  const lang = langResult.success ? langResult.data : content.defaultLanguage;
-
   const guestLine = params.to?.trim().slice(0, 80) || undefined;
 
-  return <Invitation content={content} lang={lang} guestLine={guestLine} />;
+  return (
+    <Invitation
+      content={content}
+      lang={content.defaultLanguage}
+      guestLine={guestLine}
+    />
+  );
 }
