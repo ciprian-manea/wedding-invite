@@ -144,11 +144,22 @@ export function Cover({
 
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-end overflow-hidden">
+      {/* Stays invisible until revealed: Envelope and OpeningVideo crossfade
+          over each other on tap, and for a moment both are partially
+          transparent. Without this, that moment lets this very different-
+          looking final-frame photo bleed through underneath them. */}
       <motion.div
         className="absolute inset-0"
-        initial={{ scale: 1 }}
-        animate={revealed && !reducedMotion ? { scale: 1.04 } : undefined}
-        transition={{ duration: 12, ease: "linear" }}
+        initial={{ opacity: 0, scale: 1 }}
+        animate={
+          revealed
+            ? { opacity: 1, scale: reducedMotion ? 1 : 1.04 }
+            : undefined
+        }
+        transition={{
+          opacity: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+          scale: { duration: 12, ease: "linear" },
+        }}
       >
         <Image
           src={lastFrameSrc}
