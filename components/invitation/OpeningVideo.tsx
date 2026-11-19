@@ -17,6 +17,12 @@ type OpeningVideoProps = {
 // motion has settled instead of waiting out the whole still.
 const HANDOFF_BEFORE_END_S = 1.5;
 
+// It also opens on a ~2.4 s still of the closed envelope, the same image as the
+// poster. Start partway into it (a media fragment, honoured by Safari and Chrome)
+// so the envelope begins to move about half a second after the tap.
+const START_AT_S = 1.9;
+const withStart = (src: string) => `${src}#t=${START_AT_S}`;
+
 export const OpeningVideo = forwardRef<HTMLVideoElement, OpeningVideoProps>(
   function OpeningVideo(
     { src1080, src720, posterSrc, onFirstFrame, onEnded, onError },
@@ -40,7 +46,7 @@ export const OpeningVideo = forwardRef<HTMLVideoElement, OpeningVideoProps>(
       const video = localRef.current;
       if (!video) return;
       const smallScreen = window.innerWidth * window.devicePixelRatio < 1000;
-      const chosen = smallScreen ? src720 : src1080;
+      const chosen = withStart(smallScreen ? src720 : src1080);
       if (video.getAttribute("src") !== chosen) {
         video.src = chosen;
         video.load();
@@ -50,7 +56,7 @@ export const OpeningVideo = forwardRef<HTMLVideoElement, OpeningVideoProps>(
     return (
       <motion.video
         ref={setRefs}
-        src={src1080}
+        src={withStart(src1080)}
         poster={posterSrc}
         muted
         playsInline
