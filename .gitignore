@@ -17,3 +17,6 @@ playwright-report/
 
 # os
 .DS_Store
+
+# editor
+.idea/
