@@ -9,6 +9,8 @@ type CoverProps = {
   lastFrameSrc: string;
   partner1: string;
   partner2: string;
+  dearLabel?: string;
+  guestNames?: string;
   subtitle: string;
   quote?: string;
   dateLabel: string;
@@ -133,6 +135,8 @@ export function Cover({
   lastFrameSrc,
   partner1,
   partner2,
+  dearLabel,
+  guestNames,
   subtitle,
   quote,
   dateLabel,
@@ -202,10 +206,23 @@ export function Cover({
             </motion.span>
           ))}
         </h1>
+        {guestNames && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={revealed ? { opacity: 1 } : undefined}
+            transition={{ delay: 0.5, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="font-serif text-lg text-[var(--color-ink)]"
+          >
+            {dearLabel && <span>{dearLabel} </span>}
+            <span className="font-[family-name:var(--font-script),var(--font-serif)] text-xl text-[var(--color-accent)]">
+              {guestNames}
+            </span>
+          </motion.p>
+        )}
         <motion.p
           initial={{ opacity: 0 }}
           animate={revealed ? { opacity: 1 } : undefined}
-          transition={{ delay: 0.5, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 0.65, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="font-serif text-lg text-[var(--color-ink)]"
         >
           {subtitle}
@@ -215,7 +232,7 @@ export function Cover({
             initial={{ opacity: 0 }}
             animate={revealed ? { opacity: 1 } : undefined}
             transition={{
-              delay: 0.65,
+              delay: 0.8,
               duration: 0.6,
               ease: [0.22, 1, 0.36, 1],
             }}
@@ -227,7 +244,7 @@ export function Cover({
         <motion.p
           initial={{ opacity: 0 }}
           animate={revealed ? { opacity: 1 } : undefined}
-          transition={{ delay: 0.8, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 0.95, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="font-sans text-xs tracking-[0.2em] text-[var(--color-ink-soft)] uppercase"
         >
           {dateLabel}
@@ -235,7 +252,7 @@ export function Cover({
         <motion.p
           initial={{ opacity: 0 }}
           animate={revealed ? { opacity: 1 } : undefined}
-          transition={{ delay: 1.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 1.35, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mt-4 font-sans text-xs tracking-[0.2em] text-[var(--color-ink-soft)] uppercase"
         >
           {scrollHintLabel}

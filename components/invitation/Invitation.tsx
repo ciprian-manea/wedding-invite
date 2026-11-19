@@ -242,6 +242,12 @@ export function Invitation({ content, lang, guestLine }: InvitationProps) {
             lastFrameSrc={lastFrameSrc}
             partner1={couple.partner1}
             partner2={couple.partner2}
+            dearLabel={
+              greeting.dear
+                ? t(greeting.dear, currentLang, defaultLanguage)
+                : undefined
+            }
+            guestNames={greeting.guestNames}
             subtitle={t(coverSection.subtitle, currentLang, defaultLanguage)}
             quote={
               coverSection.quote

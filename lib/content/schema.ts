@@ -128,6 +128,12 @@ export const contentSchema = z.object({
     generic: localizedSchema,
     invitedLine: localizedSchema,
     tapToOpen: localizedSchema,
+    // The "Dragii noștri ..." line on the Cover, naming who this link is
+    // for. Optional: a link with no named guests just omits the line. The
+    // name itself isn't localized (same spelling in every language, like
+    // `couple.partner1`/`partner2`), only the lead-in phrase is.
+    dear: localizedSchema.optional(),
+    guestNames: z.string().optional(),
   }),
   event: z.object({
     dateTime: z.string(),
