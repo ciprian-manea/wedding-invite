@@ -17,10 +17,13 @@ type OpeningVideoProps = {
 // motion has settled instead of waiting out the whole still.
 const HANDOFF_BEFORE_END_S = 1.5;
 
-// It also opens on a ~2.4 s still of the closed envelope, the same image as the
-// poster. Start partway into it (a media fragment, honoured by Safari and Chrome)
-// so the envelope begins to move about half a second after the tap.
-const START_AT_S = 1.9;
+// It also opens on a still of the closed envelope, the same image as the poster.
+// Start partway into it (a media fragment, honoured by Safari and Chrome) so the
+// envelope begins to move about half a second after the tap. How long that still
+// actually lasts depends on the footage - re-check it (frame-by-frame, not just
+// freezedetect: a slow drift can read as "frozen" frame-to-frame while still
+// drifting visibly from frame 0) whenever open.mp4 is re-shot, and retune this.
+const START_AT_S = 0.3;
 const withStart = (src: string) => `${src}#t=${START_AT_S}`;
 
 export const OpeningVideo = forwardRef<HTMLVideoElement, OpeningVideoProps>(
