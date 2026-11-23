@@ -213,8 +213,8 @@ export function Cover({
                 initial={{ opacity: 0 }}
                 animate={revealed ? { opacity: 1 } : undefined}
                 transition={{
-                  delay: 0.3,
-                  duration: 0.5,
+                  delay: 0.45,
+                  duration: 0.8,
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 className="font-serif text-lg text-[var(--color-ink)]"
@@ -226,8 +226,8 @@ export function Cover({
               initial={{ opacity: 0 }}
               animate={revealed ? { opacity: 1 } : undefined}
               transition={{
-                delay: 0.35,
-                duration: 0.5,
+                delay: 0.65,
+                duration: 0.8,
                 ease: [0.22, 1, 0.36, 1],
               }}
               className="font-[family-name:var(--font-script),var(--font-serif)] text-2xl text-[var(--color-accent)]"
@@ -239,7 +239,7 @@ export function Cover({
         <motion.p
           initial={{ opacity: 0 }}
           animate={revealed ? { opacity: 1 } : undefined}
-          transition={{ delay: 0.4, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 0.9, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="font-serif text-lg text-[var(--color-ink)]"
         >
           {subtitle}
@@ -249,8 +249,8 @@ export function Cover({
             initial={{ opacity: 0 }}
             animate={revealed ? { opacity: 1 } : undefined}
             transition={{
-              delay: 0.5,
-              duration: 0.5,
+              delay: 1.2,
+              duration: 0.8,
               ease: [0.22, 1, 0.36, 1],
             }}
             className="font-serif text-base text-[var(--color-ink-soft)] italic"
@@ -261,7 +261,7 @@ export function Cover({
         <motion.p
           initial={{ opacity: 0 }}
           animate={revealed ? { opacity: 1 } : undefined}
-          transition={{ delay: 0.6, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 1.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="font-sans text-xs tracking-[0.2em] text-[var(--color-ink-soft)] uppercase"
         >
           {dateLabel}
@@ -269,7 +269,7 @@ export function Cover({
         <motion.p
           initial={{ opacity: 0 }}
           animate={revealed ? { opacity: 1 } : undefined}
-          transition={{ delay: 0.8, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 1.9, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="mt-4 font-sans text-xs tracking-[0.2em] text-[var(--color-ink-soft)] uppercase"
         >
           {scrollHintLabel}
