@@ -7,9 +7,11 @@
 #   HOLD_END=2        seconds the last frame stays still at the end
 #   SPEED=1           below 1 slows the motion (0.85 = 15 % slower)
 #   XFADE=0           seconds of crossfade between clips (e.g. 0.3) to hide a small jump at the join
-#   CONTENT_W=1000    each clip's content width before padding to 1080 (lower = more side margin)
-#   MARGIN_COLOR=...  the pad colour (sampled from the art's own blank paper, not the page's
-#                      --color-paper token, so it blends with the actual pixels next to it)
+#   CONTENT_W=1080    each clip's content width before fitting to 1080 (lower = visible side
+#                      margin, padded in MARGIN_COLOR; 1080 is edge-to-edge, same as the poster)
+#   MARGIN_COLOR=...  the pad colour when CONTENT_W < 1080, sampled from the art's own blank
+#                      paper (not the page's --color-paper token) so it blends with the pixels
+#                      next to it
 # Output: assets-src/<design>/open.mp4 (1080x1920, 24 fps, high quality H.264, no audio)
 set -euo pipefail
 
@@ -20,25 +22,26 @@ HOLD_START="${HOLD_START:-1.5}"
 HOLD_END="${HOLD_END:-2}"
 SPEED="${SPEED:-1}"
 XFADE="${XFADE:-0}"
-CONTENT_W="${CONTENT_W:-1000}"
+CONTENT_W="${CONTENT_W:-1080}"
 MARGIN_COLOR="${MARGIN_COLOR:-0xE6E7DF}"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 
 # 1. Normalise every clip: scale every take to the SAME content width (not a per-clip
-#    cover-crop, which zooms each take by whatever its own aspect ratio demands and was
-#    cropping a different amount off each one - the visible cause of the ornaments
-#    landing at slightly different margins at the clip1/clip2 join), then pad to
-#    1080x1920. CONTENT_W < 1080 leaves a deliberate, identical side margin on every
-#    clip instead of cropping to the edge. Requires each take's height-at-CONTENT_W to
-#    stay under 1920 (true for ~9:16 takes); a very differently-shaped take would need
-#    a smaller CONTENT_W or this will fail on a negative pad.
+#    cover-crop, which zooms each take by whatever its own aspect ratio demands - on takes
+#    with slightly different native aspect ratios that crops a different amount off each
+#    one, landing the ornaments at a slightly different margin at the clip1/clip2 join),
+#    then fit it to 1080x1920. At the default CONTENT_W=1080 that's a centered crop to
+#    1920 tall, edge-to-edge like the poster; CONTENT_W < 1080 pads a visible side margin
+#    in MARGIN_COLOR instead (only safe if height-at-CONTENT_W stays under 1920).
 i=0
 for c in "$@"; do
   [ -f "$c" ] || c="$SRC/takes/$c"
   [ -f "$c" ] || { echo "Clip not found: $c" >&2; exit 1; }
+  FIT="pad=1080:1920:(ow-iw)/2:(oh-ih)/2:color=$MARGIN_COLOR"
+  [ "$CONTENT_W" -ge 1080 ] && FIT="crop=1080:1920"
   ffmpeg -v error -y -i "$c" -an \
-    -vf "setpts=PTS/$SPEED,scale=$CONTENT_W:-2,pad=1080:1920:(ow-iw)/2:(oh-ih)/2:color=$MARGIN_COLOR,fps=24,format=yuv420p" \
+    -vf "setpts=PTS/$SPEED,scale=$CONTENT_W:-2,$FIT,fps=24,format=yuv420p" \
     -c:v libx264 -crf 14 -preset medium "$TMP/n$i.mp4"
   i=$((i + 1))
 done
