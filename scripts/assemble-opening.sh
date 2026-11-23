@@ -7,11 +7,6 @@
 #   HOLD_END=2        seconds the last frame stays still at the end
 #   SPEED=1           below 1 slows the motion (0.85 = 15 % slower)
 #   XFADE=0           seconds of crossfade between clips (e.g. 0.3) to hide a small jump at the join
-#   CONTENT_W=1080    each clip's content width before fitting to 1080 (lower = visible side
-#                      margin, padded in MARGIN_COLOR; 1080 is edge-to-edge, same as the poster)
-#   MARGIN_COLOR=...  the pad colour when CONTENT_W < 1080, sampled from the art's own blank
-#                      paper (not the page's --color-paper token) so it blends with the pixels
-#                      next to it
 # Output: assets-src/<design>/open.mp4 (1080x1920, 24 fps, high quality H.264, no audio)
 set -euo pipefail
 
@@ -22,26 +17,25 @@ HOLD_START="${HOLD_START:-1.5}"
 HOLD_END="${HOLD_END:-2}"
 SPEED="${SPEED:-1}"
 XFADE="${XFADE:-0}"
-CONTENT_W="${CONTENT_W:-1080}"
-MARGIN_COLOR="${MARGIN_COLOR:-0xE6E7DF}"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 
-# 1. Normalise every clip: scale every take to the SAME content width (not a per-clip
-#    cover-crop, which zooms each take by whatever its own aspect ratio demands - on takes
-#    with slightly different native aspect ratios that crops a different amount off each
-#    one, landing the ornaments at a slightly different margin at the clip1/clip2 join),
-#    then fit it to 1080x1920. At the default CONTENT_W=1080 that's a centered crop to
-#    1920 tall, edge-to-edge like the poster; CONTENT_W < 1080 pads a visible side margin
-#    in MARGIN_COLOR instead (only safe if height-at-CONTENT_W stays under 1920).
+# 1. Normalise every clip: cover-crop to 1080x1920 (each clip's own aspect ratio decides
+#    the zoom, same as before - takes with slightly different native aspect ratios were
+#    already landing their card art at very nearly the same width and the same distance
+#    from the TOP edge once scaled, measured directly on these two takes). The crop itself
+#    is anchored to the top (y=0), not ffmpeg's default centered crop: a take with more
+#    excess height to trim loses all of it off the bottom instead of splitting it evenly
+#    top and bottom, which was shifting that take's ornaments further from BOTH edges than
+#    the other take's - the actual, visible cause of "the second video moves the ornaments
+#    toward the top and bottom". Top-anchoring keeps the (already close) top alignment and
+#    puts 100% of any per-take difference where it's least visible, low on the frame.
 i=0
 for c in "$@"; do
   [ -f "$c" ] || c="$SRC/takes/$c"
   [ -f "$c" ] || { echo "Clip not found: $c" >&2; exit 1; }
-  FIT="pad=1080:1920:(ow-iw)/2:(oh-ih)/2:color=$MARGIN_COLOR"
-  [ "$CONTENT_W" -ge 1080 ] && FIT="crop=1080:1920"
   ffmpeg -v error -y -i "$c" -an \
-    -vf "setpts=PTS/$SPEED,scale=$CONTENT_W:-2,$FIT,fps=24,format=yuv420p" \
+    -vf "setpts=PTS/$SPEED,scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920:0:0,fps=24,format=yuv420p" \
     -c:v libx264 -crf 14 -preset medium "$TMP/n$i.mp4"
   i=$((i + 1))
 done
