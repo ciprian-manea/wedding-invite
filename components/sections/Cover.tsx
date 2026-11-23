@@ -214,7 +214,12 @@ export function Cover({
             : undefined
         }
         transition={{
-          opacity: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+          // Matches OpeningVideo's own exit fade (0.3s) exactly, so the video
+          // finishes disappearing at the same instant this (the same image,
+          // its last frame) finishes appearing - no window where neither is
+          // fully opaque. It was 0.6s, twice as long as the video's exit,
+          // which left exactly that gap.
+          opacity: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
           scale: { duration: 12, ease: "linear" },
         }}
       >
