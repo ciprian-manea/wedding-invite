@@ -131,6 +131,59 @@ function PetalsCanvas({ active }: { active: boolean }) {
   );
 }
 
+// Reveals a line of text one character at a time, left to right - used for
+// every line in the post-reveal text block, not just the couple's names.
+const CHAR_STAGGER = 0.035;
+const CHAR_DURATION = 0.6;
+
+type GradualTextProps = {
+  text: string;
+  revealed: boolean;
+  reducedMotion: boolean;
+  baseDelay: number;
+  className: string;
+  as?: "p" | "h1";
+};
+
+function GradualText({
+  text,
+  revealed,
+  reducedMotion,
+  baseDelay,
+  className,
+  as = "p",
+}: GradualTextProps) {
+  const chars = [...text].map((char, index) => (
+    <motion.span
+      // See the comment in Reveal.tsx: `initial` freezes at mount, so the
+      // key must include `reducedMotion` to force a remount once it
+      // resolves to its real value.
+      key={`${index}-${reducedMotion}`}
+      aria-hidden="true"
+      initial={{ opacity: 0, y: reducedMotion ? 0 : 8 }}
+      animate={revealed ? { opacity: 1, y: 0 } : undefined}
+      transition={{
+        duration: CHAR_DURATION,
+        delay: reducedMotion ? 0 : baseDelay + index * CHAR_STAGGER,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="inline-block"
+    >
+      {char === " " ? "\u00A0" : char}
+    </motion.span>
+  ));
+
+  return as === "h1" ? (
+    <h1 aria-label={text} className={className}>
+      {chars}
+    </h1>
+  ) : (
+    <p aria-label={text} className={className}>
+      {chars}
+    </p>
+  );
+}
+
 export function Cover({
   lastFrameSrc,
   partner1,
@@ -182,98 +235,64 @@ export function Cover({
             couple's names are the one place this could matter even for the
             default (Latin) demo content, if a real couple's names were
             Cyrillic. */}
-        <h1
-          aria-label={names}
+        <GradualText
+          as="h1"
+          text={names}
+          revealed={revealed}
+          reducedMotion={reducedMotion}
+          baseDelay={0}
           className="font-[family-name:var(--font-script),var(--font-serif)] text-5xl text-[var(--color-accent)]"
-        >
-          {[...names].map((char, index) => (
-            <motion.span
-              // See the comment in Reveal.tsx: `initial` freezes at mount, so
-              // the key must include `reducedMotion` to force a remount once
-              // it resolves to its real value.
-              key={`${index}-${reducedMotion}`}
-              aria-hidden="true"
-              initial={{ opacity: 0, y: reducedMotion ? 0 : 8 }}
-              animate={revealed ? { opacity: 1, y: 0 } : undefined}
-              transition={{
-                duration: 0.5,
-                delay: reducedMotion ? 0 : index * 0.025,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="inline-block"
-            >
-              {char === " " ? " " : char}
-            </motion.span>
-          ))}
-        </h1>
+        />
         {guestNames && (
           <div className="flex flex-col items-center gap-1">
             {dearLabel && (
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={revealed ? { opacity: 1 } : undefined}
-                transition={{
-                  delay: 0.45,
-                  duration: 0.8,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
+              <GradualText
+                text={dearLabel}
+                revealed={revealed}
+                reducedMotion={reducedMotion}
+                baseDelay={0.9}
                 className="font-serif text-lg text-[var(--color-ink)]"
-              >
-                {dearLabel}
-              </motion.p>
+              />
             )}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={revealed ? { opacity: 1 } : undefined}
-              transition={{
-                delay: 0.65,
-                duration: 0.8,
-                ease: [0.22, 1, 0.36, 1],
-              }}
+            <GradualText
+              text={guestNames}
+              revealed={revealed}
+              reducedMotion={reducedMotion}
+              baseDelay={1.3}
               className="font-[family-name:var(--font-script),var(--font-serif)] text-2xl text-[var(--color-accent)]"
-            >
-              {guestNames}
-            </motion.p>
+            />
           </div>
         )}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={revealed ? { opacity: 1 } : undefined}
-          transition={{ delay: 0.9, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        <GradualText
+          text={subtitle}
+          revealed={revealed}
+          reducedMotion={reducedMotion}
+          baseDelay={1.8}
           className="font-serif text-lg text-[var(--color-ink)]"
-        >
-          {subtitle}
-        </motion.p>
+        />
         {quote && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={revealed ? { opacity: 1 } : undefined}
-            transition={{
-              delay: 1.2,
-              duration: 0.8,
-              ease: [0.22, 1, 0.36, 1],
-            }}
+          <GradualText
+            text={quote}
+            revealed={revealed}
+            reducedMotion={reducedMotion}
+            baseDelay={2.3}
             className="font-serif text-base text-[var(--color-ink-soft)] italic"
-          >
-            {quote}
-          </motion.p>
+          />
         )}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={revealed ? { opacity: 1 } : undefined}
-          transition={{ delay: 1.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        <GradualText
+          text={dateLabel}
+          revealed={revealed}
+          reducedMotion={reducedMotion}
+          baseDelay={2.8}
           className="font-sans text-xs tracking-[0.2em] text-[var(--color-ink-soft)] uppercase"
-        >
-          {dateLabel}
-        </motion.p>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={revealed ? { opacity: 1 } : undefined}
-          transition={{ delay: 1.9, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        />
+        <GradualText
+          text={scrollHintLabel}
+          revealed={revealed}
+          reducedMotion={reducedMotion}
+          baseDelay={3.4}
           className="mt-4 font-sans text-xs tracking-[0.2em] text-[var(--color-ink-soft)] uppercase"
-        >
-          {scrollHintLabel}
-        </motion.p>
+        />
       </div>
     </div>
   );
