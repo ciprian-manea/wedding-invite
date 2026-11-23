@@ -7,6 +7,8 @@
 #   HOLD_END=2        seconds the last frame stays still at the end
 #   SPEED=1           below 1 slows the motion (0.85 = 15 % slower)
 #   XFADE=0           seconds of crossfade between clips (e.g. 0.3) to hide a small jump at the join
+#   VSCALE=           comma-separated extra vertical scale per clip, e.g. "1,0.9909" (see below);
+#                      defaults to 1 (no correction) for every clip
 # Output: assets-src/<design>/open.mp4 (1080x1920, 24 fps, high quality H.264, no audio)
 set -euo pipefail
 
@@ -17,25 +19,31 @@ HOLD_START="${HOLD_START:-1.5}"
 HOLD_END="${HOLD_END:-2}"
 SPEED="${SPEED:-1}"
 XFADE="${XFADE:-0}"
+VSCALE="${VSCALE:-}"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 
-# 1. Normalise every clip: cover-crop to 1080x1920 (each clip's own aspect ratio decides
-#    the zoom, same as before - takes with slightly different native aspect ratios were
-#    already landing their card art at very nearly the same width and the same distance
-#    from the TOP edge once scaled, measured directly on these two takes). The crop itself
-#    is anchored to the top (y=0), not ffmpeg's default centered crop: a take with more
-#    excess height to trim loses all of it off the bottom instead of splitting it evenly
-#    top and bottom, which was shifting that take's ornaments further from BOTH edges than
-#    the other take's - the actual, visible cause of "the second video moves the ornaments
-#    toward the top and bottom". Top-anchoring keeps the (already close) top alignment and
-#    puts 100% of any per-take difference where it's least visible, low on the frame.
+# 1. Normalise every clip: cover-crop to 1080x1920, top-anchored (crop=...:0:0, not ffmpeg's
+#    default centered crop) so a take with more excess height to trim loses it off the bottom
+#    only, where it's least visible, instead of shifting its ornaments away from BOTH edges.
+#    VSCALE then corrects for the two takes' own art not being at quite the same vertical
+#    scale to begin with - found by measuring a few shared features (a border line, the bow,
+#    a corner ornament) at increasing distance from the top in each take's last/first frame:
+#    if the drift between takes grows roughly in proportion to that distance, it's a shared-
+#    anchor vertical scale mismatch, not random per-feature noise, and dividing the more
+#    "stretched" take's height scale by that ratio (keeping width untouched) corrects it.
+#    Re-measure and recompute per clip on every re-shoot; this is calibrated to this footage.
 i=0
 for c in "$@"; do
   [ -f "$c" ] || c="$SRC/takes/$c"
   [ -f "$c" ] || { echo "Clip not found: $c" >&2; exit 1; }
+  V=$(echo "$VSCALE" | cut -d, -f$((i + 1))); [ -z "$V" ] && V=1
+  WH=$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 "$c")
+  S=$(awk -F x -v w="${WH%x*}" -v h="${WH#*x}" 'BEGIN { sw = 1080 / w; sh = 1920 / h; print (sw > sh) ? sw : sh }')
+  TW=$(awk -v w="${WH%x*}" -v s="$S" 'BEGIN { print int(w * s * 1.001 / 2 + 0.999) * 2 }')
+  TH=$(awk -v h="${WH#*x}" -v s="$S" -v v="$V" 'BEGIN { print int(h * s * v * 1.001 / 2 + 0.999) * 2 }')
   ffmpeg -v error -y -i "$c" -an \
-    -vf "setpts=PTS/$SPEED,scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920:0:0,fps=24,format=yuv420p" \
+    -vf "setpts=PTS/$SPEED,scale=$TW:$TH,crop=1080:1920:0:0,fps=24,format=yuv420p" \
     -c:v libx264 -crf 14 -preset medium "$TMP/n$i.mp4"
   i=$((i + 1))
 done
